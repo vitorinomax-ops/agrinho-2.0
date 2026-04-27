@@ -1,0 +1,43 @@
+:root {
+    --primary: #1b5e20;
+    --accent: #c6ff00;
+    --bg: #ffffff;
+    --text: #222222;
+    --card: #f4f4f4;
+}
+
+body.dark-mode {
+    --bg: #121212;
+    --text: #e0e0e0;
+    --card: #222222;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; transition: 0.3s; }
+
+body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg); color: var(--text); }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+/* Navbar */
+.navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+.logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+.logo span { color: var(--primary); filter: brightness(1.5); }
+
+/* Hero */
+.hero { padding: 80px 0; text-align: center; background: linear-gradient(to bottom, rgba(27,94,32,0.1), transparent); }
+.hidden { display: none; }
+
+/* Grid de Artigos */
+.section-title { margin: 40px 0 20px; border-left: 5px solid var(--primary); padding-left: 15px; }
+.articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+
+.news-card { background: var(--card); padding: 25px; border-radius: 12px; position: relative; }
+.badge { background: var(--primary); color: white; font-size: 0.7rem; padding: 3px 8px; border-radius: 20px; display: inline-block; margin-bottom: 10px; }
+.read-more { color: var(--primary); font-weight: bold; text-decoration: none; display: block; margin-top: 15px; }
+
+/* Vídeos */
+.video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 20px; }
+.video-placeholder { 
+    background: #000; height: 250px; border-radius: 12px; display: flex; 
+    flex-direction: column; justify-content: center; align-items: center; color: white; 
+}
+.play-icon { font-size: 3rem; color: var(--accent); cursor: pointer; margin-bottom: 10
