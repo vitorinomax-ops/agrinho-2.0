@@ -1,87 +1,97 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroSustentável | Hub de Conhecimento</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+"use strict";
 
-    <header>
-        <nav class="navbar container">
-            <div class="logo">Agro<span>Forte</span></div>
-            <div class="controls">
-                <button id="theme-btn">🌓 Alternar Tema</button>
-                <button id="font-up">A+</button>
-            </div>
-        </nav>
-    </header>
+const AgroApp = {
+    init() {
+        this.navHandler();
+        this.tabsHandler();
+        this.themeHandler();
+        this.revealManager();
+    },
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Conhecimento para <br><span>Nutrir o Futuro</span></h1>
-                <p>Explore nossa curadoria de artigos científicos, matérias e vídeos sobre o equilíbrio ambiental.</p>
+    navHandler() {
+        const nav = document.querySelector('#nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+    },
+
+    themeHandler() {
+        const themeBtn = document.querySelector('#theme-master');
+        const body = document.body;
+
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('light-theme');
+            const isLight = body.classList.contains('light-theme');
+            themeBtn.innerHTML = isLight ? "🌙" : "☀️";
+            localStorage.setItem('agro-theme', isLight ? 'light' : 'dark');
+        });
+
+        // Checar preferência salva
+        if (localStorage.getItem('agro-theme') === 'light') {
+            body.classList.add('light-theme');
+            themeBtn.innerHTML = "🌙";
+        }
+    },
+
+    tabsHandler() {
+        const btns = document.querySelectorAll('.hub-btn');
+        const title = document.querySelector('#hub-title');
+        const desc = document.querySelector('#hub-description');
+        
+        const contentData = {
+            ia: {
+                title: "Visual Computing",
+                desc: "Drones com sensores hiperespectrais que detectam pragas e estresse hídrico através de IA preventiva."
+            },
+            bio: {
+                title: "Regenerative Bio",
+                desc: "Soluções biológicas que restauram o bioma do solo, aumentando a produtividade de forma sustentável."
+            },
+            iot: {
+                title: "IoT Mesh",
+                desc: "Rede de sensores de baixa latência conectando máquinas e solo em tempo real sem necessidade de 5G."
+            }
+        };
+
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.getAttribute('data-target');
                 
-                <div id="interaction-box">
-                    <input type="text" id="user-name" placeholder="Digite seu nome para começar...">
-                    <button id="main-action">Liberar Conteúdo</button>
-                </div>
-                <div id="display-welcome" class="hidden"></div>
-            </div>
-        </section>
+                btns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
 
-        <section class="container section-padding">
-            <h2 class="section-title">Artigos e Materiais de Apoio</h2>
-            <div class="grid-layout">
-                <article class="content-card">
-                    <span class="category">Embrapa</span>
-                    <h3>O Sistema ILPF</h3>
-                    <p>Entenda como a Integração Lavoura-Pecuária-Floresta pode recuperar solos e aumentar o lucro.</p>
-                    <a href="https://www.embrapa.br/tema-integracao-lavoura-pecuaria-floresta-ilpf" target="_blank" class="link-btn">Acessar Artigo →</a>
-                </article>
+                // Animação de saída
+                const display = document.querySelector('.hub-display');
+                display.style.opacity = '0';
+                display.style.transform = 'translateY(10px)';
 
-                <article class="content-card">
-                    <span class="category">Tecnologia</span>
-                    <h3>Agricultura de Precisão</h3>
-                    <p>Matéria sobre como o GPS e sensores reduzem o uso de defensivos e protegem nascentes.</p>
-                    <a href="https://www.senar.org.br/blog/agricultura-de-precisao-o-que-e-e-quais-os-beneficios/" target="_blank" class="link-btn">Ler Matéria →</a>
-                </article>
+                setTimeout(() => {
+                    title.innerText = contentData[target].title;
+                    desc.innerText = contentData[target].desc;
+                    display.style.opacity = '1';
+                    display.style.transform = 'translateY(0)';
+                }, 300);
+            });
+        });
+    },
 
-                <article class="content-card">
-                    <span class="category">Meio Ambiente</span>
-                    <h3>Código Florestal Brasileiro</h3>
-                    <p>Um guia sobre as Áreas de Preservação Permanente (APPs) e sua importância para o ecossistema.</p>
-                    <a href="https://www.gov.br/agricultura/pt-br/assuntos/sustentabilidade/codigo-florestal" target="_blank" class="link-btn">Ver Guia →</a>
-                </article>
-            </div>
-        </section>
+    revealManager() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, { threshold: 0.1 });
 
-        <section class="video-area">
-            <div class="container">
-                <h2 class="section-title">Vídeos Educativos</h2>
-                <div class="grid-layout">
-                    <a href="https://www.youtube.com/watch?v=kYI94k7vjAs" target="_blank" class="video-box">
-                        <div class="play-overlay">▶</div>
-                        <p>Vídeo: Sustentabilidade no Campo (YouTube)</p>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=N4f8WpD5f5I" target="_blank" class="video-box">
-                        <div class="play-overlay">▶</div>
-                        <p>Vídeo: Tecnologia e Agro (YouTube)</p>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
+        document.querySelectorAll('.bento-item, .hub-container').forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(30px)";
+            el.style.transition = "1s cubic-bezier(0.4, 0, 0.2, 1)";
+            observer.observe(el);
+        });
+    }
+};
 
-    <footer class="footer">
-        <div class="container">
-            <p><strong>Projeto Agrinho 2026</strong> | Sustentabilidade e Inovação</p>
-            <p>Referências extraídas de bases científicas e órgãos oficiais do agronegócio.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+document.addEventListener('DOMContentLoaded', () => AgroApp.init());
