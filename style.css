@@ -407,3 +407,56 @@ RESPONSIVO
     box-shadow:var(--shadow);
     border-top:5px solid var(--ouro);
 }
+.accessibility-box{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+
+    width:220px;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:1rem;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.15);
+
+    z-index:9999;
+}
+
+.accessibility-box h3{
+    text-align:center;
+    margin-bottom:1rem;
+    color:var(--azul);
+}
+
+.accessibility-box button{
+    width:100%;
+    border:none;
+    margin:.3rem 0;
+    padding:.8rem;
+
+    border-radius:10px;
+
+    background:var(--azul);
+    color:#fff;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.accessibility-box button:hover{
+    transform:translateY(-2px);
+}
+
+.dark-mode .accessibility-box{
+    background:#1f1f1f;
+    color:white;
+}
+
+.dark-mode .accessibility-box h3{
+    color:#fff;
+}
