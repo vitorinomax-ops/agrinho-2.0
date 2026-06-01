@@ -1,97 +1,109 @@
-"use strict";
+/* ==========================
+ACCORDION
+========================== */
 
-const AgroApp = {
-    init() {
-        this.navHandler();
-        this.tabsHandler();
-        this.themeHandler();
-        this.revealManager();
-    },
+const accordions =
+document.querySelectorAll(".accordion-header");
 
-    navHandler() {
-        const nav = document.querySelector('#nav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 50);
-        });
-    },
+accordions.forEach(btn => {
 
-    themeHandler() {
-        const themeBtn = document.querySelector('#theme-master');
-        const body = document.body;
+    btn.addEventListener("click", () => {
 
-        themeBtn.addEventListener('click', () => {
-            body.classList.toggle('light-theme');
-            const isLight = body.classList.contains('light-theme');
-            themeBtn.innerHTML = isLight ? "🌙" : "☀️";
-            localStorage.setItem('agro-theme', isLight ? 'light' : 'dark');
-        });
+        const content =
+        btn.nextElementSibling;
 
-        // Checar preferência salva
-        if (localStorage.getItem('agro-theme') === 'light') {
-            body.classList.add('light-theme');
-            themeBtn.innerHTML = "🌙";
-        }
-    },
+        content.classList.toggle("active");
 
-    tabsHandler() {
-        const btns = document.querySelectorAll('.hub-btn');
-        const title = document.querySelector('#hub-title');
-        const desc = document.querySelector('#hub-description');
-        
-        const contentData = {
-            ia: {
-                title: "Visual Computing",
-                desc: "Drones com sensores hiperespectrais que detectam pragas e estresse hídrico através de IA preventiva."
-            },
-            bio: {
-                title: "Regenerative Bio",
-                desc: "Soluções biológicas que restauram o bioma do solo, aumentando a produtividade de forma sustentável."
-            },
-            iot: {
-                title: "IoT Mesh",
-                desc: "Rede de sensores de baixa latência conectando máquinas e solo em tempo real sem necessidade de 5G."
-            }
-        };
+    });
 
-        btns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const target = btn.getAttribute('data-target');
-                
-                btns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+});
 
-                // Animação de saída
-                const display = document.querySelector('.hub-display');
-                display.style.opacity = '0';
-                display.style.transform = 'translateY(10px)';
+/* ==========================
+FONTE
+========================== */
 
-                setTimeout(() => {
-                    title.innerText = contentData[target].title;
-                    desc.innerText = contentData[target].desc;
-                    display.style.opacity = '1';
-                    display.style.transform = 'translateY(0)';
-                }, 300);
-            });
-        });
-    },
+let currentFont = 16;
 
-    revealManager() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = "1";
-                    entry.target.style.transform = "translateY(0)";
-                }
-            });
-        }, { threshold: 0.1 });
+const html =
+document.documentElement;
 
-        document.querySelectorAll('.bento-item, .hub-container').forEach(el => {
-            el.style.opacity = "0";
-            el.style.transform = "translateY(30px)";
-            el.style.transition = "1s cubic-bezier(0.4, 0, 0.2, 1)";
-            observer.observe(el);
-        });
+document
+.getElementById("increaseFont")
+.addEventListener("click", () => {
+
+    currentFont += 2;
+
+    html.style.setProperty(
+        "--font-size",
+        currentFont + "px"
+    );
+
+});
+
+document
+.getElementById("decreaseFont")
+.addEventListener("click", () => {
+
+    if(currentFont > 12){
+
+        currentFont -= 2;
+
+        html.style.setProperty(
+            "--font-size",
+            currentFont + "px"
+        );
+
     }
-};
 
-document.addEventListener('DOMContentLoaded', () => AgroApp.init());
+});
+
+/* ==========================
+MODO ESCURO
+========================== */
+
+document
+.getElementById("toggleTheme")
+.addEventListener("click", () => {
+
+    document.body.classList.toggle(
+        "dark-mode"
+    );
+
+});
+
+/* ==========================
+LEITURA POR VOZ
+========================== */
+
+let speech = null;
+
+document
+.getElementById("startReading")
+.addEventListener("click", () => {
+
+    window.speechSynthesis.cancel();
+
+    const mainContent =
+    document.getElementById("mainContent");
+
+    speech =
+    new SpeechSynthesisUtterance(
+        mainContent.innerText
+    );
+
+    speech.lang = "pt-BR";
+    speech.rate = 1;
+
+    window.speechSynthesis.speak(
+        speech
+    );
+
+});
+
+document
+.getElementById("stopReading")
+.addEventListener("click", () => {
+
+    window.speechSynthesis.cancel();
+
+});
