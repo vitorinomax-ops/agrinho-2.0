@@ -1,12 +1,282 @@
-<button id="theme-master" class="theme-trigger" aria-label="Alternar Tema">
-    <span class="icon-sun">☀️</span>
-</button>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agro Forte, Futuro Sustentável</title>
 
-<div class="panel-text">
-    <h3 id="hub-title">Visão Computacional</h3>
-    <p id="hub-description">Nossos drones não apenas filmam; eles interpretam o espectro infravermelho para identificar estresse hídrico antes mesmo da planta murchar.</p>
-    <div class="feature-tags-wrapper">
-        <div class="feature-tag">Redes Neurais</div>
-        <div class="feature-tag">Real-time Data</div>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- =========================
+    ACESSIBILIDADE
+    ========================== -->
+
+    <div class="accessibility-box" aria-label="Ferramentas de acessibilidade">
+        <h3>Acessibilidade</h3>
+
+        <button id="increaseFont">A+</button>
+        <button id="decreaseFont">A-</button>
+        <button id="toggleTheme">🌙/☀️</button>
+        <button id="startReading">🔊 Ler</button>
+        <button id="stopReading">⏹ Parar</button>
     </div>
-</div>
+
+    <!-- =========================
+    HERO
+    ========================== -->
+
+    <header class="hero">
+
+        <div class="hero-content">
+            <span class="tag">Agro + Tecnologia + Sustentabilidade</span>
+
+            <h1>
+                Agro Forte,
+                <span>Futuro Sustentável</span>
+            </h1>
+
+            <p>
+                Inteligência Artificial, inovação agrícola e uso inteligente da água
+                para produzir mais, preservar recursos naturais e construir um campo
+                mais eficiente para as próximas gerações.
+            </p>
+
+            <a href="#conteudo" class="btn-primary">
+                Conheça as Soluções
+            </a>
+        </div>
+
+    </header>
+
+    <!-- =========================
+    CONTEÚDO PRINCIPAL
+    ========================== -->
+
+    <main id="mainContent">
+
+        <section id="conteudo" class="container">
+
+            <div class="content-grid">
+
+                <!-- LADO ESQUERDO -->
+                <div class="content-area">
+
+                    <div class="section-title">
+                        <h2>Uso Sustentável da Água na Agricultura</h2>
+                        <p>
+                            O equilíbrio entre produção agrícola e preservação ambiental
+                            depende da adoção de tecnologias que aumentam a eficiência
+                            hídrica e reduzem desperdícios.
+                        </p>
+                    </div>
+
+                    <!-- CARDS -->
+                    <div class="cards">
+
+                        <article class="card">
+                            <h3>Irrigação Inteligente</h3>
+                            <p>
+                                Sensores, automação e análise de dados permitem aplicar
+                                água apenas quando necessário, reduzindo perdas e
+                                aumentando a produtividade.
+                            </p>
+                        </article>
+
+                        <article class="card">
+                            <h3>Monitoramento por IA</h3>
+                            <p>
+                                Sistemas inteligentes analisam clima, solo e culturas
+                                para apoiar decisões mais sustentáveis e eficientes.
+                            </p>
+                        </article>
+
+                        <article class="card">
+                            <h3>Conservação do Solo</h3>
+                            <p>
+                                Cobertura vegetal e manejo adequado ajudam a manter a
+                                umidade por mais tempo e diminuem a necessidade de irrigação.
+                            </p>
+                        </article>
+
+                        <article class="card">
+                            <h3>Reuso da Água</h3>
+                            <p>
+                                O reaproveitamento de recursos hídricos reduz a pressão
+                                sobre mananciais e fortalece a sustentabilidade das propriedades.
+                            </p>
+                        </article>
+
+                    </div>
+
+                    <!-- IMAGENS -->
+                    <section class="gallery">
+
+                        <div class="imagem">
+                            <img src="Foto1.png" alt="Tecnologia de irrigação sustentável">
+                        </div>
+
+                        <div class="imagem">
+                            <img src="Foto2.png" alt="Monitoramento agrícola com inteligência artificial">
+                        </div>
+
+                        <div class="imagem">
+                            <img src="Foto3.png" alt="Uso eficiente da água no campo">
+                        </div>
+
+                    </section>
+
+                    <!-- ACCORDION -->
+                    <section class="accordion-section">
+
+                        <h2>Práticas Sustentáveis</h2>
+
+                        <div class="accordion-item">
+
+                            <button class="accordion-header">
+                                Irrigação de Precisão
+                            </button>
+
+                            <div class="accordion-content">
+                                <p>
+                                    Utiliza sensores e sistemas automatizados para fornecer
+                                    água na quantidade adequada, evitando desperdícios e
+                                    aumentando a eficiência do uso hídrico.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="accordion-item">
+
+                            <button class="accordion-header">
+                                Cobertura do Solo
+                            </button>
+
+                            <div class="accordion-content">
+                                <p>
+                                    A cobertura vegetal reduz evaporação, melhora a retenção
+                                    de umidade e contribui para a saúde do solo.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="accordion-item">
+
+                            <button class="accordion-header">
+                                Reuso e Gestão da Água
+                            </button>
+
+                            <div class="accordion-content">
+                                <p>
+                                    O reaproveitamento da água e o monitoramento constante
+                                    dos recursos hídricos tornam a produção mais resiliente.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <!-- COMENTÁRIOS -->
+                    <section class="comments">
+
+                        <h2>Participe da Discussão</h2>
+
+                        <textarea
+                            placeholder="Deixe seu comentário..."
+                            aria-label="Campo de comentário">
+                        </textarea>
+
+                        <button class="btn-primary">
+                            Enviar Comentário
+                        </button>
+
+                    </section>
+
+                </div>
+
+                <!-- FORMULÁRIO -->
+                <aside class="sidebar">
+
+                    <div class="form-card">
+
+                        <h2>
+                            Venha conhecer melhor como a IA pode ser uma aliada do Campo.
+                        </h2>
+
+                        <p>
+                            Inscreva-se no nosso seminário on-line.
+                        </p>
+
+                        <form>
+
+                            <input
+                                type="text"
+                                placeholder="Nome"
+                                required>
+
+                            <input
+                                type="email"
+                                placeholder="E-mail"
+                                required>
+
+                            <input
+                                type="text"
+                                placeholder="Cidade">
+
+                            <input
+                                type="text"
+                                placeholder="Estado">
+
+                            <input
+                                type="text"
+                                placeholder="País">
+
+                            <button type="submit" class="btn-primary">
+                                Inscrever-se
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- =========================
+    RODAPÉ
+    ========================== -->
+
+    <footer>
+
+        <div class="footer-content">
+
+            <h3>Referências Utilizadas</h3>
+
+            <ul>
+                <li>PwC Brasil – Agricultura do Futuro e Uso Sustentável da Água</li>
+                <li>Embrapa – Sustentabilidade da Agricultura e Uso da Água</li>
+                <li>Embrapa – Água na Agricultura</li>
+                <li>Syngenta Mais Agro – Reuso da Água na Agricultura</li>
+            </ul>
+
+            <p class="footer-phrase">
+                AgroFuturo 2026 ° Conectando a inteligência tecnologia à terra de forma sustentável
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
