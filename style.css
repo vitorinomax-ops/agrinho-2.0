@@ -1,7 +1,3 @@
-```css
-/* =====================================
-   VARIÁVEIS
-===================================== */
 
 :root{
     --azul:#0B5ED7;
@@ -14,8 +10,7 @@
 
     --radius:20px;
 
-    --shadow:
-    0 10px 30px rgba(0,0,0,.10);
+    --shadow:0 10px 30px rgba(0,0,0,.10);
 
     --transition:.3s ease;
 
@@ -47,8 +42,9 @@ body{
 
     background:#fff;
     color:#222;
-
     line-height:1.7;
+
+    overflow-x:hidden;
 }
 
 img{
@@ -71,7 +67,7 @@ textarea{
 ===================================== */
 
 .hero{
-    min-height:100vh;
+    min-height:80vh;
 
     display:flex;
     justify-content:center;
@@ -85,10 +81,13 @@ textarea{
 
     background:
     linear-gradient(
-        135deg,
-        var(--azul),
-        var(--verde)
-    );
+        rgba(0,0,0,.45),
+        rgba(0,0,0,.45)
+    ),
+    url("https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1920&q=80");
+
+    background-size:cover;
+    background-position:center;
 }
 
 .hero-content{
@@ -102,16 +101,13 @@ textarea{
 
     border-radius:999px;
 
-    background:
-    rgba(255,255,255,.15);
+    background:rgba(255,255,255,.15);
 
     margin-bottom:1.5rem;
 }
 
 .hero h1{
-    font-size:
-    clamp(2.8rem,7vw,5rem);
-
+    font-size:clamp(2.8rem,7vw,5rem);
     margin-bottom:1rem;
 }
 
@@ -120,9 +116,7 @@ textarea{
 }
 
 .hero p{
-    font-size:
-    clamp(1rem,2vw,1.3rem);
-
+    font-size:clamp(1rem,2vw,1.3rem);
     margin-bottom:2rem;
 }
 
@@ -135,7 +129,6 @@ textarea{
     color:#000;
 
     border:none;
-
     border-radius:12px;
 
     cursor:pointer;
@@ -154,18 +147,24 @@ textarea{
 ===================================== */
 
 .container{
-    width:min(1400px,95%);
+    width:min(1200px,92%);
     margin:auto;
     padding:4rem 0;
 }
 
 .content-grid{
     display:grid;
-
-    grid-template-columns:
-    2fr 1fr;
-
+    grid-template-columns:minmax(0,2.3fr) minmax(320px,1fr);
     gap:2rem;
+    align-items:start;
+}
+
+.content-area{
+    min-width:0;
+}
+
+.sidebar{
+    width:100%;
 }
 
 .section-title{
@@ -175,6 +174,21 @@ textarea{
 .section-title h2{
     color:var(--azul);
     margin-bottom:.8rem;
+    font-size:2rem;
+}
+
+.section-title h2::after{
+    content:"";
+    display:block;
+
+    width:70px;
+    height:4px;
+
+    background:var(--ouro);
+
+    margin-top:10px;
+
+    border-radius:999px;
 }
 
 /* =====================================
@@ -195,17 +209,19 @@ textarea{
 .card{
     background:white;
 
-    padding:1.5rem;
+    padding:1.8rem;
 
     border-radius:var(--radius);
 
     box-shadow:var(--shadow);
 
+    border-top:5px solid var(--verde);
+
     transition:var(--transition);
 }
 
 .card:hover{
-    transform:translateY(-5px);
+    transform:translateY(-6px);
 }
 
 .card h3{
@@ -238,9 +254,12 @@ textarea{
     border-radius:20px;
 
     box-shadow:var(--shadow);
+
+    height:280px;
 }
 
 .imagem img{
+    width:100%;
     height:100%;
 
     object-fit:cover;
@@ -289,8 +308,7 @@ textarea{
 
     background:#f5f5f5;
 
-    border-radius:
-    0 0 12px 12px;
+    border-radius:0 0 12px 12px;
 }
 
 .accordion-content.active{
@@ -317,10 +335,15 @@ textarea{
 
     border-radius:20px;
 
-    border-top:
-    5px solid var(--ouro);
+    border-top:5px solid var(--ouro);
 
     box-shadow:var(--shadow);
+
+    transition:var(--transition);
+}
+
+.timeline-item:hover{
+    transform:translateY(-6px);
 }
 
 /* =====================================
@@ -329,8 +352,7 @@ textarea{
 
 .form-card{
     position:sticky;
-
-    top:20px;
+    top:30px;
 
     background:white;
 
@@ -338,12 +360,19 @@ textarea{
 
     border-radius:20px;
 
+    border-top:6px solid var(--verde);
+
     box-shadow:var(--shadow);
+
+    transition:var(--transition);
+}
+
+.form-card:hover{
+    transform:translateY(-5px);
 }
 
 .form-card h2{
     color:var(--verde);
-
     margin-bottom:1rem;
 }
 
@@ -353,9 +382,7 @@ textarea{
 
 .form-card form{
     display:flex;
-
     flex-direction:column;
-
     gap:1rem;
 }
 
@@ -364,8 +391,7 @@ textarea{
 
     border-radius:10px;
 
-    border:
-    1px solid #ddd;
+    border:1px solid #ddd;
 }
 
 /* =====================================
@@ -374,6 +400,12 @@ textarea{
 
 .comments{
     margin-top:4rem;
+
+    background:#f8fafc;
+
+    padding:2rem;
+
+    border-radius:20px;
 }
 
 .comments textarea{
@@ -389,8 +421,7 @@ textarea{
 
     border-radius:12px;
 
-    border:
-    1px solid #ddd;
+    border:1px solid #ddd;
 }
 
 #commentList{
@@ -398,99 +429,17 @@ textarea{
 }
 
 .comment{
-    background:#f5f5f5;
+    background:white;
 
     padding:1rem;
 
     border-radius:12px;
 
-    margin-bottom:1rem;
-}
+    border-left:5px solid var(--verde);
 
-/* =====================================
-   ACESSIBILIDADE
-===================================== */
-
-.accessibility-box{
-    position:fixed;
-
-    right:20px;
-    bottom:20px;
-
-    width:220px;
-
-    background:white;
-
-    border-radius:18px;
-
-    padding:1rem;
-
-    box-shadow:
-    0 15px 35px
-    rgba(0,0,0,.15);
-
-    z-index:9999;
-}
-
-.accessibility-box h3{
-    text-align:center;
-
-    color:var(--azul);
+    box-shadow:var(--shadow);
 
     margin-bottom:1rem;
-}
-
-.accessibility-box button{
-    width:100%;
-
-    border:none;
-
-    margin:.3rem 0;
-
-    padding:.8rem;
-
-    border-radius:10px;
-
-    background:var(--azul);
-
-    color:white;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.accessibility-box button:hover{
-    transform:translateY(-2px);
-}
-
-/* =====================================
-   RODAPÉ
-===================================== */
-
-footer{
-    background:#121212;
-
-    color:white;
-
-    padding:3rem 1rem;
-}
-
-.footer-content{
-    max-width:1200px;
-
-    margin:auto;
-}
-
-.footer-content ul{
-    margin:
-    1rem 0 2rem 1.5rem;
-}
-
-.footer-phrase{
-    color:var(--amarelo);
-
-    font-weight:bold;
 }
 
 /* =====================================
@@ -504,6 +453,106 @@ footer{
 .curiosities,
 .conclusion{
     margin-top:4rem;
+
+    background:#f8fafc;
+
+    padding:2rem;
+
+    border-radius:20px;
+}
+
+/* =====================================
+   ACESSIBILIDADE
+===================================== */
+
+.accessibility-box{
+    position:fixed;
+
+    right:15px;
+    bottom:15px;
+
+    width:140px;
+
+    max-height:75vh;
+
+    overflow-y:auto;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:.8rem;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+    z-index:1000;
+}
+
+.accessibility-box h3{
+    text-align:center;
+
+    color:var(--azul);
+
+    margin-bottom:1rem;
+
+    font-size:.9rem;
+}
+
+.accessibility-box button{
+    width:100%;
+
+    border:none;
+
+    margin:.3rem 0;
+
+    padding:.7rem;
+
+    border-radius:10px;
+
+    background:var(--azul);
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    font-size:.85rem;
+}
+
+.accessibility-box button:hover{
+    transform:translateY(-2px);
+}
+
+/* =====================================
+   RODAPÉ
+===================================== */
+
+footer{
+    background:
+    linear-gradient(
+        135deg,
+        var(--azul),
+        var(--verde)
+    );
+
+    color:white;
+
+    padding:3rem 1rem;
+}
+
+.footer-content{
+    max-width:1200px;
+    margin:auto;
+}
+
+.footer-content ul{
+    margin:1rem 0 2rem 1.5rem;
+}
+
+.footer-phrase{
+    color:var(--amarelo);
+    font-weight:bold;
 }
 
 /* =====================================
@@ -515,8 +564,7 @@ footer{
     color:#f5f5f5;
 }
 
-.dark-mode main,
-.dark-mode section{
+.dark-mode main{
     background:#121212;
 }
 
@@ -529,13 +577,21 @@ footer{
     color:white;
 }
 
+.dark-mode .info-section,
+.dark-mode .benefits,
+.dark-mode .timeline-section,
+.dark-mode .impact-section,
+.dark-mode .curiosities,
+.dark-mode .conclusion,
+.dark-mode .comments{
+    background:#1a1a1a;
+}
+
 .dark-mode input,
 .dark-mode textarea{
     background:#2a2a2a;
     color:white;
-
-    border:
-    1px solid #555;
+    border:1px solid #555;
 }
 
 .dark-mode .section-title h2{
@@ -561,15 +617,16 @@ footer{
     }
 
     .sidebar{
-        order:-1;
+        order:0;
     }
 
     .form-card{
         position:relative;
+        top:auto;
     }
 
     .accessibility-box{
-        width:180px;
+        width:130px;
     }
 
 }
@@ -585,10 +642,8 @@ footer{
     }
 
     .accessibility-box{
-        width:160px;
+        width:120px;
         right:10px;
         bottom:10px;
     }
-
 }
-```
