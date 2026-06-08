@@ -24,7 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
             document
             .querySelectorAll(".accordion-content")
             .forEach(item => {
+
                 item.classList.remove("active");
+
             });
 
             if (!isActive) {
@@ -43,9 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.documentElement;
 
     let currentFont =
-    parseInt(
-        localStorage.getItem("fontSize")
-    ) || 16;
+    parseInt(localStorage.getItem("fontSize")) || 16;
 
     html.style.setProperty(
         "--font-size",
@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             localStorage.setItem(
                 "fontSize",
-                16
+                "16"
             );
 
         });
@@ -136,27 +136,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const body =
     document.body;
 
-    const savedTheme =
-    localStorage.getItem("theme");
-
-    if (savedTheme === "dark") {
-        body.classList.add("dark-mode");
-    }
-
     const toggleTheme =
     document.getElementById("toggleTheme");
+
+    if (
+        localStorage.getItem("theme")
+        === "dark"
+    ) {
+        body.classList.add("dark-mode");
+    }
 
     if (toggleTheme) {
 
         toggleTheme.addEventListener("click", () => {
 
-            body.classList.toggle("dark-mode");
+            body.classList.toggle(
+                "dark-mode"
+            );
 
             localStorage.setItem(
                 "theme",
                 body.classList.contains("dark-mode")
-                    ? "dark"
-                    : "light"
+                ? "dark"
+                : "light"
             );
 
         });
@@ -167,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
        LEITURA POR VOZ
     ===================================== */
 
-    let speech = null;
+    let speech;
 
     const startReading =
     document.getElementById("startReading");
@@ -187,14 +189,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             window.speechSynthesis.cancel();
 
-            const mainContent =
+            const content =
             document.getElementById("mainContent");
 
-            if (!mainContent) return;
+            if (!content) return;
 
             speech =
             new SpeechSynthesisUtterance(
-                mainContent.innerText
+                content.innerText
             );
 
             speech.lang = "pt-BR";
@@ -263,16 +265,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
         commentList.innerHTML = "";
 
-        comments.forEach(comment => {
+        comments.forEach((comment, index) => {
 
             const div =
             document.createElement("div");
 
-            div.classList.add("comment");
+            div.className = "comment";
 
-            div.textContent = comment;
+            div.innerHTML = `
+                <p>${comment}</p>
+                <button class="delete-comment" data-id="${index}">
+                    Excluir
+                </button>
+            `;
 
             commentList.appendChild(div);
+
+        });
+
+        const deleteButtons =
+        document.querySelectorAll(".delete-comment");
+
+        deleteButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const id =
+                button.dataset.id;
+
+                comments.splice(id, 1);
+
+                localStorage.setItem(
+                    "comments",
+                    JSON.stringify(comments)
+                );
+
+                loadComments();
+
+            });
 
         });
 
@@ -285,14 +315,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const text =
             commentInput.value.trim();
 
-            if (text === "") {
+            if (!text) {
 
                 alert(
-                    "Digite um comentário antes de enviar."
+                    "Digite um comentário."
                 );
 
                 return;
-
             }
 
             const comments =
@@ -318,7 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadComments();
 
     /* =====================================
-       FORMULÁRIO
+       FORMULÁRIO SEMINÁRIO
     ===================================== */
 
     const form =
@@ -367,17 +396,16 @@ document.addEventListener("DOMContentLoaded", () => {
             position: "fixed",
             left: "20px",
             bottom: "20px",
-            width: "50px",
-            height: "50px",
+            width: "55px",
+            height: "55px",
             border: "none",
             borderRadius: "50%",
-            background: "#0B5ED7",
-            color: "#ffffff",
-            cursor: "pointer",
             fontSize: "20px",
-            fontWeight: "bold",
+            cursor: "pointer",
             display: "none",
             zIndex: "9999",
+            background: "#0B5ED7",
+            color: "#fff",
             boxShadow:
                 "0 5px 15px rgba(0,0,0,.2)"
         }
@@ -387,7 +415,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "scroll",
         () => {
 
-            if (window.scrollY > 400) {
+            if (
+                window.scrollY > 400
+            ) {
 
                 topButton.style.display =
                 "block";
@@ -415,30 +445,39 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     /* =====================================
-       ANIMAÇÃO SUAVE DOS CARDS
+       ANIMAÇÃO AO ROLAR
     ===================================== */
 
     const cards =
     document.querySelectorAll(
-        ".card, .timeline-item"
+        ".card, .timeline-item, .imagem"
     );
 
     const observer =
-    new IntersectionObserver(entries => {
+    new IntersectionObserver(
+        entries => {
 
-        entries.forEach(entry => {
+            entries.forEach(entry => {
 
-            if (entry.isIntersecting) {
+                if (
+                    entry.isIntersecting
+                ) {
 
-                entry.target.style.opacity = "1";
-                entry.target.style.transform =
-                "translateY(0)";
+                    entry.target.style.opacity =
+                    "1";
 
-            }
+                    entry.target.style.transform =
+                    "translateY(0)";
 
-        });
+                }
 
-    });
+            });
+
+        },
+        {
+            threshold: 0.15
+        }
+    );
 
     cards.forEach(card => {
 
@@ -453,7 +492,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     console.log(
-        "✅ Agro Forte carregado com sucesso!"
+        "✅ Projeto Agro Forte carregado com sucesso!"
     );
 
 });
