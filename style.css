@@ -492,3 +492,35 @@ RESPONSIVO
 .dark-mode footer{
     background:#000;
 }
+<div
+class="accessibility-box"
+role="complementary"
+aria-label="Ferramentas de acessibilidade">
+
+<h3>Acessibilidade</h3>
+
+<button id="increaseFont">A+</button>
+<button id="decreaseFont">A-</button>
+<button id="resetFont">A</button>
+
+<button id="toggleTheme">
+🌙 Tema
+</button>
+
+<button id="startReading">
+🔊 Ler Conteúdo
+</button>
+
+<button id="pauseReading">
+⏸ Pausar
+</button>
+
+<button id="resumeReading">
+▶ Continuar
+</button>
+
+<button id="stopReading">
+⏹ Parar
+</button>
+
+</div>
