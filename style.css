@@ -1,13 +1,15 @@
-/* ===================================
-VARIÁVEIS
-=================================== */
+```css
+/* =====================================
+   VARIÁVEIS
+===================================== */
 
 :root{
     --azul:#0B5ED7;
     --verde:#2E8B57;
     --amarelo:#F4C430;
     --ouro:#D4AF37;
-    --branco:#FFFFFF;
+
+    --branco:#ffffff;
     --preto:#121212;
 
     --radius:20px;
@@ -20,9 +22,9 @@ VARIÁVEIS
     --font-size:16px;
 }
 
-/* ===================================
-RESET
-=================================== */
+/* =====================================
+   RESET
+===================================== */
 
 *{
     margin:0;
@@ -36,9 +38,16 @@ html{
 }
 
 body{
-    font-family:Segoe UI, sans-serif;
-    background:white;
+    font-family:
+    "Segoe UI",
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
+
+    background:#fff;
     color:#222;
+
     line-height:1.7;
 }
 
@@ -47,33 +56,39 @@ img{
     display:block;
 }
 
+a{
+    text-decoration:none;
+}
+
 button,
 input,
 textarea{
     font:inherit;
 }
 
-/* ===================================
-HERO
-=================================== */
+/* =====================================
+   HERO
+===================================== */
 
 .hero{
     min-height:100vh;
+
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:4rem 1.5rem;
+
+    color:white;
 
     background:
     linear-gradient(
         135deg,
-        #0B5ED7,
-        #2E8B57
+        var(--azul),
+        var(--verde)
     );
-
-    color:white;
-
-    padding:4rem 1.5rem;
-    text-align:center;
 }
 
 .hero-content{
@@ -82,14 +97,21 @@ HERO
 
 .tag{
     display:inline-block;
-    background:rgba(255,255,255,.15);
-    padding:.7rem 1.2rem;
+
+    padding:.8rem 1.3rem;
+
     border-radius:999px;
+
+    background:
+    rgba(255,255,255,.15);
+
     margin-bottom:1.5rem;
 }
 
 .hero h1{
-    font-size:clamp(2.5rem,6vw,5rem);
+    font-size:
+    clamp(2.8rem,7vw,5rem);
+
     margin-bottom:1rem;
 }
 
@@ -98,19 +120,28 @@ HERO
 }
 
 .hero p{
-    font-size:clamp(1rem,2vw,1.3rem);
+    font-size:
+    clamp(1rem,2vw,1.3rem);
+
     margin-bottom:2rem;
 }
 
 .btn-primary{
-    background:var(--ouro);
-    color:black;
-    border:none;
+    display:inline-block;
+
     padding:1rem 1.8rem;
+
+    background:var(--ouro);
+    color:#000;
+
+    border:none;
+
     border-radius:12px;
+
     cursor:pointer;
-    text-decoration:none;
+
     font-weight:700;
+
     transition:var(--transition);
 }
 
@@ -118,9 +149,9 @@ HERO
     transform:translateY(-3px);
 }
 
-/* ===================================
-LAYOUT
-=================================== */
+/* =====================================
+   LAYOUT
+===================================== */
 
 .container{
     width:min(1400px,95%);
@@ -130,7 +161,10 @@ LAYOUT
 
 .content-grid{
     display:grid;
-    grid-template-columns:2fr 1fr;
+
+    grid-template-columns:
+    2fr 1fr;
+
     gap:2rem;
 }
 
@@ -140,30 +174,38 @@ LAYOUT
 
 .section-title h2{
     color:var(--azul);
-    margin-bottom:1rem;
+    margin-bottom:.8rem;
 }
 
-/* ===================================
-CARDS
-=================================== */
+/* =====================================
+   CARDS
+===================================== */
 
 .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
     gap:1.5rem;
+
     margin-bottom:3rem;
 }
 
 .card{
     background:white;
+
     padding:1.5rem;
+
     border-radius:var(--radius);
+
     box-shadow:var(--shadow);
+
     transition:var(--transition);
 }
 
 .card:hover{
-    transform:translateY(-6px);
+    transform:translateY(-5px);
 }
 
 .card h3{
@@ -171,26 +213,38 @@ CARDS
     margin-bottom:1rem;
 }
 
-/* ===================================
-GALERIA
-=================================== */
+.full-card{
+    margin-bottom:3rem;
+}
+
+/* =====================================
+   GALERIA
+===================================== */
 
 .gallery{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
     gap:1.5rem;
+
     margin-bottom:3rem;
 }
 
 .imagem{
     overflow:hidden;
+
     border-radius:20px;
+
     box-shadow:var(--shadow);
 }
 
 .imagem img{
     height:100%;
+
     object-fit:cover;
+
     transition:.5s;
 }
 
@@ -198,12 +252,12 @@ GALERIA
     transform:scale(1.05);
 }
 
-/* ===================================
-ACCORDION
-=================================== */
+/* =====================================
+   ACCORDION
+===================================== */
 
 .accordion-section{
-    margin-bottom:3rem;
+    margin-bottom:4rem;
 }
 
 .accordion-item{
@@ -212,12 +266,17 @@ ACCORDION
 
 .accordion-header{
     width:100%;
+
     border:none;
-    cursor:pointer;
+
     text-align:left;
 
+    cursor:pointer;
+
     padding:1rem;
+
     background:var(--azul);
+
     color:white;
 
     border-radius:12px;
@@ -227,140 +286,273 @@ ACCORDION
     display:none;
 
     padding:1rem;
+
     background:#f5f5f5;
-    border-radius:0 0 12px 12px;
+
+    border-radius:
+    0 0 12px 12px;
 }
 
 .accordion-content.active{
     display:block;
 }
 
-/* ===================================
-FORMULÁRIO
-=================================== */
+/* =====================================
+   TIMELINE
+===================================== */
+
+.timeline{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:1.5rem;
+}
+
+.timeline-item{
+    background:white;
+
+    padding:1.5rem;
+
+    border-radius:20px;
+
+    border-top:
+    5px solid var(--ouro);
+
+    box-shadow:var(--shadow);
+}
+
+/* =====================================
+   FORMULÁRIO
+===================================== */
 
 .form-card{
     position:sticky;
+
     top:20px;
 
     background:white;
+
     padding:2rem;
-    border-radius:var(--radius);
+
+    border-radius:20px;
+
     box-shadow:var(--shadow);
 }
 
 .form-card h2{
     color:var(--verde);
+
     margin-bottom:1rem;
 }
 
 .form-card p{
-    margin-bottom:1.5rem;
+    margin-bottom:1rem;
 }
 
 .form-card form{
     display:flex;
+
     flex-direction:column;
+
     gap:1rem;
 }
 
 .form-card input{
     padding:1rem;
+
     border-radius:10px;
-    border:1px solid #ddd;
+
+    border:
+    1px solid #ddd;
 }
 
-/* ===================================
-COMENTÁRIOS
-=================================== */
+/* =====================================
+   COMENTÁRIOS
+===================================== */
 
 .comments{
-    margin-top:2rem;
+    margin-top:4rem;
 }
 
 .comments textarea{
     width:100%;
+
     min-height:150px;
 
+    resize:vertical;
+
     padding:1rem;
+
     margin:1rem 0;
 
     border-radius:12px;
-    border:1px solid #ddd;
+
+    border:
+    1px solid #ddd;
 }
 
-/* ===================================
-ACESSIBILIDADE
-=================================== */
+#commentList{
+    margin-top:1rem;
+}
+
+.comment{
+    background:#f5f5f5;
+
+    padding:1rem;
+
+    border-radius:12px;
+
+    margin-bottom:1rem;
+}
+
+/* =====================================
+   ACESSIBILIDADE
+===================================== */
 
 .accessibility-box{
     position:fixed;
-    right:15px;
-    bottom:15px;
+
+    right:20px;
+    bottom:20px;
+
+    width:220px;
 
     background:white;
+
+    border-radius:18px;
+
     padding:1rem;
 
-    border-radius:15px;
-    box-shadow:var(--shadow);
+    box-shadow:
+    0 15px 35px
+    rgba(0,0,0,.15);
 
-    z-index:999;
+    z-index:9999;
 }
 
 .accessibility-box h3{
-    margin-bottom:.7rem;
-    font-size:.9rem;
+    text-align:center;
+
+    color:var(--azul);
+
+    margin-bottom:1rem;
 }
 
 .accessibility-box button{
     width:100%;
-    margin:.2rem 0;
-    padding:.6rem;
+
+    border:none;
+
+    margin:.3rem 0;
+
+    padding:.8rem;
+
+    border-radius:10px;
+
+    background:var(--azul);
+
+    color:white;
+
     cursor:pointer;
+
+    transition:.3s;
 }
 
-/* ===================================
-RODAPÉ
-=================================== */
+.accessibility-box button:hover{
+    transform:translateY(-2px);
+}
+
+/* =====================================
+   RODAPÉ
+===================================== */
 
 footer{
-    background:var(--preto);
+    background:#121212;
+
     color:white;
+
     padding:3rem 1rem;
 }
 
 .footer-content{
     max-width:1200px;
+
     margin:auto;
 }
 
 .footer-content ul{
-    margin:1rem 0 2rem 1.5rem;
+    margin:
+    1rem 0 2rem 1.5rem;
 }
 
 .footer-phrase{
     color:var(--amarelo);
-    font-weight:700;
+
+    font-weight:bold;
 }
 
-/* ===================================
-MODO ESCURO
-=================================== */
+/* =====================================
+   SEÇÕES EXTRAS
+===================================== */
+
+.info-section,
+.benefits,
+.timeline-section,
+.impact-section,
+.curiosities,
+.conclusion{
+    margin-top:4rem;
+}
+
+/* =====================================
+   DARK MODE
+===================================== */
 
 .dark-mode{
-    background:#111;
-    color:white;
+    background:#121212;
+    color:#f5f5f5;
+}
+
+.dark-mode main,
+.dark-mode section{
+    background:#121212;
 }
 
 .dark-mode .card,
-.dark-mode .form-card{
-    background:#1d1d1d;
+.dark-mode .timeline-item,
+.dark-mode .form-card,
+.dark-mode .accordion-content,
+.dark-mode .comment{
+    background:#1f1f1f;
     color:white;
 }
 
-/* ===================================
-RESPONSIVO
-=================================== */
+.dark-mode input,
+.dark-mode textarea{
+    background:#2a2a2a;
+    color:white;
+
+    border:
+    1px solid #555;
+}
+
+.dark-mode .section-title h2{
+    color:#67b7ff;
+}
+
+.dark-mode .accessibility-box{
+    background:#1f1f1f;
+}
+
+.dark-mode footer{
+    background:#000;
+}
+
+/* =====================================
+   RESPONSIVO
+===================================== */
 
 @media(max-width:900px){
 
@@ -376,151 +568,27 @@ RESPONSIVO
         position:relative;
     }
 
-}
-.info-section,
-.benefits,
-.timeline-section,
-.impact-section,
-.curiosities,
-.conclusion{
-    margin-top:4rem;
+    .accessibility-box{
+        width:180px;
+    }
+
 }
 
-.full-card{
-    padding:2rem;
+@media(max-width:600px){
+
+    .hero h1{
+        font-size:2.4rem;
+    }
+
+    .hero{
+        padding:3rem 1rem;
+    }
+
+    .accessibility-box{
+        width:160px;
+        right:10px;
+        bottom:10px;
+    }
+
 }
-
-.full-card p{
-    margin-bottom:1rem;
-}
-
-.timeline{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:1.5rem;
-}
-
-.timeline-item{
-    background:white;
-    padding:1.5rem;
-    border-radius:20px;
-    box-shadow:var(--shadow);
-    border-top:5px solid var(--ouro);
-}
-.accessibility-box{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-
-    width:220px;
-
-    background:#fff;
-
-    border-radius:18px;
-
-    padding:1rem;
-
-    box-shadow:
-    0 15px 35px rgba(0,0,0,.15);
-
-    z-index:9999;
-}
-
-.accessibility-box h3{
-    text-align:center;
-    margin-bottom:1rem;
-    color:var(--azul);
-}
-
-.accessibility-box button{
-    width:100%;
-    border:none;
-    margin:.3rem 0;
-    padding:.8rem;
-
-    border-radius:10px;
-
-    background:var(--azul);
-    color:#fff;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.accessibility-box button:hover{
-    transform:translateY(-2px);
-}
-
-.dark-mode .accessibility-box{
-    background:#1f1f1f;
-    color:white;
-}
-
-.dark-mode .accessibility-box h3{
-    color:#fff;
-}
-.dark-mode{
-    background:#121212;
-    color:#f5f5f5;
-}
-
-.dark-mode section,
-.dark-mode main{
-    background:#121212;
-}
-
-.dark-mode .card,
-.dark-mode .timeline-item,
-.dark-mode .form-card,
-.dark-mode .accordion-content{
-    background:#1f1f1f;
-    color:white;
-}
-
-.dark-mode input,
-.dark-mode textarea{
-    background:#2a2a2a;
-    color:white;
-    border:1px solid #555;
-}
-
-.dark-mode .section-title h2{
-    color:#67b7ff;
-}
-
-.dark-mode footer{
-    background:#000;
-}
-<div
-class="accessibility-box"
-role="complementary"
-aria-label="Ferramentas de acessibilidade">
-
-<h3>Acessibilidade</h3>
-
-<button id="increaseFont">A+</button>
-<button id="decreaseFont">A-</button>
-<button id="resetFont">A</button>
-
-<button id="toggleTheme">
-🌙 Tema
-</button>
-
-<button id="startReading">
-🔊 Ler Conteúdo
-</button>
-
-<button id="pauseReading">
-⏸ Pausar
-</button>
-
-<button id="resumeReading">
-▶ Continuar
-</button>
-
-<button id="stopReading">
-⏹ Parar
-</button>
-
-</div>
+```
