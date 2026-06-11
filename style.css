@@ -741,3 +741,11 @@ body{
 .dark-mode .accordion-header.opened{
     background:#2E8B57;
 }
+.stats-section .card{
+    text-align:center;
+}
+
+.stats-section h3{
+    font-size:3rem;
+    color:var(--azul);
+}
