@@ -1,337 +1,179 @@
-/* =====================================
+
+/* ==========================================
    AGRO FORTE - SCRIPT.JS
-===================================== */
+========================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+/* ==========================================
+   ACCORDION
+========================================== */
 
-    /* =====================================
-       ACCORDION
-    ===================================== */
+const accordionHeaders =
+document.querySelectorAll(".accordion-header");
 
-    const accordionButtons =
-    document.querySelectorAll(".accordion-header");
+accordionHeaders.forEach(header => {
 
-    accordionButtons.forEach(button => {
+    header.addEventListener("click", () => {
 
-        button.addEventListener("click", () => {
+        const content =
+        header.nextElementSibling;
 
-            const content =
-            button.nextElementSibling;
+        content.classList.toggle("active");
 
-            const isActive =
-            content.classList.contains("active");
-
-            document
-            .querySelectorAll(".accordion-content")
-            .forEach(item => {
-
-                item.classList.remove("active");
-
-            });
-
-        if (!isActive) {
-
-    content.classList.add("active");
-
-    button.classList.add("opened");
-
-} else {
-
-    button.classList.remove("opened");
-
-}
-
-        });
+        header.classList.toggle("opened");
 
     });
 
-    /* =====================================
-       CONTROLE DE FONTE
-    ===================================== */
+});
 
-    const html =
-    document.documentElement;
+/* ==========================================
+   CONTROLE DE FONTE
+========================================== */
 
-    let currentFont =
-    parseInt(localStorage.getItem("fontSize")) || 16;
+let currentFont = 16;
 
-    html.style.setProperty(
-        "--font-size",
-        currentFont + "px"
+const html =
+document.documentElement;
+
+const increaseFont =
+document.getElementById("increaseFont");
+
+const decreaseFont =
+document.getElementById("decreaseFont");
+
+const resetFont =
+document.getElementById("resetFont");
+
+increaseFont.addEventListener("click", () => {
+
+    currentFont += 2;
+
+    html.style.fontSize =
+    currentFont + "px";
+
+});
+
+decreaseFont.addEventListener("click", () => {
+
+    if(currentFont > 12){
+
+        currentFont -= 2;
+
+        html.style.fontSize =
+        currentFont + "px";
+    }
+
+});
+
+resetFont.addEventListener("click", () => {
+
+    currentFont = 16;
+
+    html.style.fontSize = "16px";
+
+});
+
+/* ==========================================
+   DARK MODE
+========================================== */
+
+const toggleTheme =
+document.getElementById("toggleTheme");
+
+toggleTheme.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark-mode");
+
+    const darkModeAtivo =
+    document.body.classList.contains("dark-mode");
+
+    localStorage.setItem(
+        "darkMode",
+        darkModeAtivo
     );
 
-    const increaseFont =
-    document.getElementById("increaseFont");
+});
 
-    const decreaseFont =
-    document.getElementById("decreaseFont");
+/* Carregar preferência */
 
-    const resetFont =
-    document.getElementById("resetFont");
+if(localStorage.getItem("darkMode") === "true"){
 
-    if (increaseFont) {
+    document.body.classList.add("dark-mode");
 
-        increaseFont.addEventListener("click", () => {
+}
 
-            if (currentFont < 28) {
+/* ==========================================
+   FORMULÁRIO SEMINÁRIO
+========================================== */
 
-                currentFont += 2;
+const seminarioForm =
+document.getElementById("seminarioForm");
 
-                html.style.setProperty(
-                    "--font-size",
-                    currentFont + "px"
-                );
+if(seminarioForm){
 
-                localStorage.setItem(
-                    "fontSize",
-                    currentFont
-                );
+    seminarioForm.addEventListener(
+        "submit",
+        function(event){
 
-            }
+            event.preventDefault();
 
-        });
-
-    }
-
-    if (decreaseFont) {
-
-        decreaseFont.addEventListener("click", () => {
-
-            if (currentFont > 12) {
-
-                currentFont -= 2;
-
-                html.style.setProperty(
-                    "--font-size",
-                    currentFont + "px"
-                );
-
-                localStorage.setItem(
-                    "fontSize",
-                    currentFont
-                );
-
-            }
-
-        });
-
-    }
-
-    if (resetFont) {
-
-        resetFont.addEventListener("click", () => {
-
-            currentFont = 16;
-
-            html.style.setProperty(
-                "--font-size",
-                "16px"
+            alert(
+                "Inscrição enviada com sucesso!"
             );
 
-            localStorage.setItem(
-                "fontSize",
-                "16"
-            );
+            seminarioForm.reset();
 
-        });
+        }
+    );
 
-    }
+}
 
-    /* =====================================
-       MODO ESCURO
-    ===================================== */
+/* ==========================================
+   COMENTÁRIOS
+========================================== */
 
-    const body =
-    document.body;
+const saveComment =
+document.getElementById("saveComment");
 
-    const toggleTheme =
-    document.getElementById("toggleTheme");
+const commentText =
+document.getElementById("commentText");
 
-    if (
-        localStorage.getItem("theme")
-        === "dark"
-    ) {
-        body.classList.add("dark-mode");
-    }
+const commentList =
+document.getElementById("commentList");
 
-    if (toggleTheme) {
+function carregarComentarios(){
 
-        toggleTheme.addEventListener("click", () => {
+    const comentarios =
+    JSON.parse(
+        localStorage.getItem("comentarios")
+    ) || [];
 
-            body.classList.toggle(
-                "dark-mode"
-            );
+    commentList.innerHTML = "";
 
-            localStorage.setItem(
-                "theme",
-                body.classList.contains("dark-mode")
-                ? "dark"
-                : "light"
-            );
+    comentarios.forEach(texto => {
 
-        });
+        const div =
+        document.createElement("div");
 
-    }
+        div.classList.add("comment");
 
-    /* =====================================
-       LEITURA POR VOZ
-    ===================================== */
+        div.textContent = texto;
 
-    let speech;
+        commentList.appendChild(div);
 
-    const startReading =
-    document.getElementById("startReading");
+    });
 
-    const pauseReading =
-    document.getElementById("pauseReading");
+}
 
-    const resumeReading =
-    document.getElementById("resumeReading");
+if(saveComment){
 
-    const stopReading =
-    document.getElementById("stopReading");
+    saveComment.addEventListener(
+        "click",
+        () => {
 
-    if (startReading) {
+            const texto =
+            commentText.value.trim();
 
-        startReading.addEventListener("click", () => {
-
-            window.speechSynthesis.cancel();
-
-            const content =
-            document.getElementById("mainContent");
-
-            if (!content) return;
-
-            speech =
-            new SpeechSynthesisUtterance(
-                content.innerText
-            );
-
-            speech.lang = "pt-BR";
-            speech.rate = 1;
-            speech.pitch = 1;
-
-            window.speechSynthesis.speak(
-                speech
-            );
-
-        });
-
-    }
-
-    if (pauseReading) {
-
-        pauseReading.addEventListener("click", () => {
-
-            window.speechSynthesis.pause();
-
-        });
-
-    }
-
-    if (resumeReading) {
-
-        resumeReading.addEventListener("click", () => {
-
-            window.speechSynthesis.resume();
-
-        });
-
-    }
-
-    if (stopReading) {
-
-        stopReading.addEventListener("click", () => {
-
-            window.speechSynthesis.cancel();
-
-        });
-
-    }
-
-    /* =====================================
-       COMENTÁRIOS
-    ===================================== */
-
-    const commentInput =
-    document.getElementById("commentText");
-
-    const saveComment =
-    document.getElementById("saveComment");
-
-    const commentList =
-    document.getElementById("commentList");
-
-    function loadComments() {
-
-        if (!commentList) return;
-
-        const comments =
-        JSON.parse(
-            localStorage.getItem("comments")
-        ) || [];
-
-        commentList.innerHTML = "";
-
-        comments.forEach((comment, index) => {
-
-            const div =
-            document.createElement("div");
-
-            div.className = "comment";
-
-         const text =
-document.createElement("p");
-
-text.textContent = comment;
-
-const btn =
-document.createElement("button");
-
-btn.textContent = "Excluir";
-btn.className = "delete-comment";
-btn.dataset.id = index;
-
-div.appendChild(text);
-div.appendChild(btn);
-
-            commentList.appendChild(div);
-
-        });
-
-        const deleteButtons =
-        document.querySelectorAll(".delete-comment");
-
-        deleteButtons.forEach(button => {
-
-            button.addEventListener("click", () => {
-
-                const id =
-                button.dataset.id;
-
-                comments.splice(id, 1);
-
-                localStorage.setItem(
-                    "comments",
-                    JSON.stringify(comments)
-                );
-
-                loadComments();
-
-            });
-
-        });
-
-    }
-
-    if (saveComment) {
-
-        saveComment.addEventListener("click", () => {
-
-            const text =
-            commentInput.value.trim();
-
-            if (!text) {
+            if(texto === ""){
 
                 alert(
                     "Digite um comentário."
@@ -340,197 +182,330 @@ div.appendChild(btn);
                 return;
             }
 
-            const comments =
+            const comentarios =
             JSON.parse(
-                localStorage.getItem("comments")
+                localStorage.getItem("comentarios")
             ) || [];
 
-            comments.push(text);
+            comentarios.push(texto);
 
             localStorage.setItem(
-                "comments",
-                JSON.stringify(comments)
+                "comentarios",
+                JSON.stringify(comentarios)
             );
 
-            commentInput.value = "";
+            commentText.value = "";
 
-            loadComments();
+            carregarComentarios();
+
+        }
+    );
+
+}
+
+carregarComentarios();
+
+/* ==========================================
+   LEITURA DE TEXTO
+========================================== */
+
+let speech = null;
+
+const startReading =
+document.getElementById("startReading");
+
+const pauseReading =
+document.getElementById("pauseReading");
+
+const resumeReading =
+document.getElementById("resumeReading");
+
+const stopReading =
+document.getElementById("stopReading");
+
+if(startReading){
+
+    startReading.addEventListener(
+        "click",
+        () => {
+
+            window.speechSynthesis.cancel();
+
+            const texto =
+            document.body.innerText;
+
+            speech =
+            new SpeechSynthesisUtterance(texto);
+
+            speech.lang = "pt-BR";
+
+            speech.rate = 1;
+
+            speech.pitch = 1;
+
+            window.speechSynthesis.speak(
+                speech
+            );
+
+        }
+    );
+
+}
+
+if(pauseReading){
+
+    pauseReading.addEventListener(
+        "click",
+        () => {
+
+            window.speechSynthesis.pause();
+
+        }
+    );
+
+}
+
+if(resumeReading){
+
+    resumeReading.addEventListener(
+        "click",
+        () => {
+
+            window.speechSynthesis.resume();
+
+        }
+    );
+
+}
+
+if(stopReading){
+
+    stopReading.addEventListener(
+        "click",
+        () => {
+
+            window.speechSynthesis.cancel();
+
+        }
+    );
+
+}
+
+/* ==========================================
+   ANIMAÇÃO AO ROLAR
+========================================== */
+
+const elementosAnimados =
+document.querySelectorAll(
+    ".card, .imagem"
+);
+
+const observer =
+new IntersectionObserver(
+
+    entries => {
+
+        entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+
+                entry.target.classList.add(
+                    "show"
+                );
+
+            }
+
+        });
+
+    },
+
+    {
+        threshold:0.15
+    }
+
+);
+
+elementosAnimados.forEach(item => {
+
+    observer.observe(item);
+
+});
+
+/* ==========================================
+   BOTÃO VOLTAR AO TOPO
+========================================== */
+
+const backToTop =
+document.createElement("button");
+
+backToTop.id = "backToTop";
+
+backToTop.innerHTML = "↑";
+
+document.body.appendChild(backToTop);
+
+Object.assign(
+    backToTop.style,
+    {
+        position:"fixed",
+        bottom:"20px",
+        left:"20px",
+        width:"50px",
+        height:"50px",
+        borderRadius:"50%",
+        border:"none",
+        background:"#2E8B57",
+        color:"#fff",
+        fontSize:"22px",
+        cursor:"pointer",
+        zIndex:"999",
+        opacity:"0",
+        visibility:"hidden",
+        transition:"0.3s"
+    }
+);
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        if(window.scrollY > 400){
+
+            backToTop.style.opacity = "1";
+
+            backToTop.style.visibility =
+            "visible";
+
+        }
+
+        else{
+
+            backToTop.style.opacity = "0";
+
+            backToTop.style.visibility =
+            "hidden";
+
+        }
+
+    }
+);
+
+backToTop.addEventListener(
+    "click",
+    () => {
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
 
         });
 
     }
+);
 
-    loadComments();
+/* ==========================================
+   CONTADOR DAS ESTATÍSTICAS
+========================================== */
 
-    /* =====================================
-       FORMULÁRIO SEMINÁRIO
-    ===================================== */
+const numeros =
+document.querySelectorAll(
+    ".stats-section h3"
+);
 
-    const form =
-    document.getElementById(
-        "seminarioForm"
-    );
+function animarNumero(elemento){
 
-    if (form) {
+    const textoOriginal =
+    elemento.innerText;
 
-        form.addEventListener(
-            "submit",
-            function (event) {
+    const valor =
+    parseInt(textoOriginal);
 
-                event.preventDefault();
+    if(isNaN(valor)) return;
 
-                alert(
-                    "Inscrição enviada com sucesso!"
+    let contador = 0;
+
+    const incremento =
+    Math.ceil(valor / 50);
+
+    const timer =
+    setInterval(() => {
+
+        contador += incremento;
+
+        if(contador >= valor){
+
+            contador = valor;
+
+            clearInterval(timer);
+
+        }
+
+        if(textoOriginal.includes("%")){
+
+            elemento.innerText =
+            contador + "%";
+
+        }
+
+        else{
+
+            elemento.innerText =
+            contador;
+
+        }
+
+    }, 30);
+
+}
+
+const observerStats =
+new IntersectionObserver(
+
+    entries => {
+
+        entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+
+                animarNumero(
+                    entry.target
                 );
 
-                form.reset();
+                observerStats.unobserve(
+                    entry.target
+                );
 
             }
+
+        });
+
+    },
+
+    {
+        threshold:0.5
+    }
+
+);
+
+numeros.forEach(numero => {
+
+    observerStats.observe(numero);
+
+});
+
+/* ==========================================
+   MENSAGEM DE BOAS-VINDAS
+========================================== */
+
+window.addEventListener(
+    "load",
+    () => {
+
+        console.log(
+            "Agro Forte carregado com sucesso!"
         );
 
     }
-
-    /* =====================================
-       BOTÃO VOLTAR AO TOPO
-    ===================================== */
-
-    const topButton =
-    document.createElement("button");
-
-    topButton.id =
-    "backToTop";
-
-    topButton.innerHTML = "⬆";
-
-    document.body.appendChild(
-        topButton
-    );
-
-    Object.assign(
-        topButton.style,
-        {
-            position: "fixed",
-            left: "20px",
-            bottom: "20px",
-            width: "55px",
-            height: "55px",
-            border: "none",
-            borderRadius: "50%",
-            fontSize: "20px",
-            cursor: "pointer",
-            display: "none",
-            zIndex: "9999",
-            background: "#0B5ED7",
-            color: "#fff",
-            boxShadow:
-                "0 5px 15px rgba(0,0,0,.2)"
-        }
-    );
-
-    window.addEventListener(
-        "scroll",
-        () => {
-
-            if (
-                window.scrollY > 400
-            ) {
-
-                topButton.style.opacity = "1";
-topButton.style.visibility = "visible";
-
-            } else {
-
-                topButton.style.opacity = "0";
-topButton.style.visibility = "hidden";
-
-            }
-
-        }
-    );
-
-    topButton.addEventListener(
-        "click",
-        () => {
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-
-        }
-    );
-
-    /* =====================================
-       ANIMAÇÃO AO ROLAR
-    ===================================== */
-
-    const cards =
-    document.querySelectorAll(
-        ".card, .timeline-item, .imagem"
-    );
-
-    const observer =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(entry => {
-
-                if (
-                    entry.isIntersecting
-                ) {
-
-                    entry.target.style.opacity =
-                    "1";
-
-                    entry.target.style.transform =
-                    "translateY(0)";
-
-                }
-
-            });
-
-        },
-        {
-            threshold: 0.15
-        }
-    );
-
-    cards.forEach(card => {
-
-        card.style.opacity = "0";
-        card.style.transform =
-        "translateY(30px)";
-        card.style.transition =
-        "all .6s ease";
-
-        observer.observe(card);
-
-    });
-
-    console.log(
-        "✅ Projeto Agro Forte carregado com sucesso!"
-    );
-
-});
-const observer =
-new IntersectionObserver(entries => {
-
-    entries.forEach(entry => {
-
-        if(entry.isIntersecting){
-
-            entry.target.classList.add("show");
-
-        }
-
-    });
-
-},{
-    threshold:0.2
-});
-
-document
-.querySelectorAll(
-".card,.timeline-item,.imagem"
-)
-.forEach(el => observer.observe(el));
+);
