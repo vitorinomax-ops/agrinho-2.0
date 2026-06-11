@@ -440,8 +440,8 @@ topButton.style.visibility = "visible";
 
             } else {
 
-                topButton.style.display =
-                "none";
+                topButton.style.opacity = "0";
+topButton.style.visibility = "hidden";
 
             }
 
