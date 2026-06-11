@@ -280,12 +280,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
             div.className = "comment";
 
-            div.innerHTML = `
-                <p>${comment}</p>
-                <button class="delete-comment" data-id="${index}">
-                    Excluir
-                </button>
-            `;
+         const text =
+document.createElement("p");
+
+text.textContent = comment;
+
+const btn =
+document.createElement("button");
+
+btn.textContent = "Excluir";
+btn.className = "delete-comment";
+btn.dataset.id = index;
+
+div.appendChild(text);
+div.appendChild(btn);
 
             commentList.appendChild(div);
 
