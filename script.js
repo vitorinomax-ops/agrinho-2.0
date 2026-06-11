@@ -435,8 +435,8 @@ div.appendChild(btn);
                 window.scrollY > 400
             ) {
 
-                topButton.style.display =
-                "block";
+                topButton.style.opacity = "1";
+topButton.style.visibility = "visible";
 
             } else {
 
