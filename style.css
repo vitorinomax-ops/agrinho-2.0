@@ -730,3 +730,14 @@ body{
     transform:translateY(0);
     transition:.7s ease;
 }
+.dark-mode .card h3{
+    color:#8aff8a;
+}
+
+.dark-mode .accordion-header{
+    background:#0f4fa8;
+}
+
+.dark-mode .accordion-header.opened{
+    background:#2E8B57;
+}
