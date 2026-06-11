@@ -1,7 +1,11 @@
-```css
-/* =====================================
+/* ==========================================
+   AGRO FORTE - STYLE.CSS
+   Agricultura Sustentável + IA
+========================================== */
+
+/* ==========================================
    VARIÁVEIS
-===================================== */
+========================================== */
 
 :root{
     --azul:#0B5ED7;
@@ -11,19 +15,22 @@
 
     --branco:#ffffff;
     --preto:#121212;
+    --cinza:#f8fafc;
+    --cinza-escuro:#1f1f1f;
 
     --radius:20px;
 
-    --shadow:0 10px 30px rgba(0,0,0,.10);
+    --shadow:
+    0 10px 30px rgba(0,0,0,.10);
 
     --transition:.3s ease;
 
     --font-size:16px;
 }
 
-/* =====================================
+/* ==========================================
    RESET
-===================================== */
+========================================== */
 
 *{
     margin:0;
@@ -44,16 +51,17 @@ body{
     Verdana,
     sans-serif;
 
-    background:#fff;
+    background:var(--branco);
     color:#222;
+
     line-height:1.7;
 
     overflow-x:hidden;
 }
 
 img{
-    width:100%;
     display:block;
+    width:100%;
 }
 
 a{
@@ -66,16 +74,26 @@ textarea{
     font:inherit;
 }
 
-/* =====================================
+button{
+    cursor:pointer;
+}
+
+/* ==========================================
    HERO
-===================================== */
+========================================== */
 
 .hero{
     min-height:100vh;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     text-align:center;
+
+    color:white;
+
+    padding:2rem;
 
     background:
     linear-gradient(
@@ -86,13 +104,12 @@ textarea{
 
     background-size:cover;
     background-position:center;
-
-    color:#fff;
-    padding:2rem;
 }
 
 .hero-content{
     max-width:900px;
+
+    animation:fadeHero 1.2s ease;
 }
 
 .hero h1{
@@ -101,14 +118,29 @@ textarea{
 }
 
 .hero p{
-    font-size:1.3rem;
     max-width:700px;
     margin:auto;
-    margin-bottom:2rem;
+
+    font-size:1.3rem;
 }
-/* =====================================
+
+@keyframes fadeHero{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* ==========================================
    LAYOUT
-===================================== */
+========================================== */
 
 .container{
     width:min(1200px,92%);
@@ -118,9 +150,12 @@ textarea{
 
 .content-grid{
     display:grid;
-    grid-template-columns:minmax(0,2.3fr) minmax(320px,1fr);
+
+    grid-template-columns:
+    minmax(0,2.3fr)
+    minmax(320px,1fr);
+
     gap:2rem;
-    align-items:start;
 }
 
 .content-area{
@@ -131,35 +166,42 @@ textarea{
     width:100%;
 }
 
+/* ==========================================
+   TÍTULOS
+========================================== */
+
 .section-title{
+    text-align:center;
     margin-bottom:2rem;
 }
 
 .section-title h2{
-    color:var(--azul);
-    margin-bottom:.8rem;
     font-size:2rem;
+    color:var(--azul);
 }
 
 .section-title h2::after{
+
     content:"";
+
     display:block;
 
     width:70px;
     height:4px;
 
-    background:var(--ouro);
+    margin:10px auto 0;
 
-    margin-top:10px;
+    background:var(--ouro);
 
     border-radius:999px;
 }
 
-/* =====================================
+/* ==========================================
    CARDS
-===================================== */
+========================================== */
 
 .cards{
+
     display:grid;
 
     grid-template-columns:
@@ -167,21 +209,24 @@ textarea{
 
     gap:1.5rem;
 
-    margin-bottom:3rem;
+    margin-top:2rem;
 }
 
 .card{
+
     background:white;
 
     padding:1.8rem;
 
     border-radius:var(--radius);
 
-    box-shadow:var(--shadow);
-
     border-top:5px solid var(--verde);
 
+    box-shadow:var(--shadow);
+
     transition:var(--transition);
+
+    height:100%;
 }
 
 .card:hover{
@@ -194,14 +239,16 @@ textarea{
 }
 
 .full-card{
-    margin-bottom:3rem;
+    padding:2rem;
+    line-height:1.9;
 }
 
-/* =====================================
+/* ==========================================
    GALERIA
-===================================== */
+========================================== */
 
 .gallery{
+
     display:grid;
 
     grid-template-columns:
@@ -209,38 +256,174 @@ textarea{
 
     gap:1.5rem;
 
+    margin-top:2rem;
     margin-bottom:3rem;
 }
 
 .imagem{
+
+    position:relative;
+
     overflow:hidden;
 
     border-radius:20px;
 
     box-shadow:var(--shadow);
 
-    height:280px;
+    min-height:280px;
 }
 
 .imagem img{
+
     width:100%;
     height:100%;
 
     object-fit:cover;
 
-    transition:.5s;
+    transition:.5s ease;
 }
 
 .imagem:hover img{
-    transform:scale(1.05);
+    transform:scale(1.08);
 }
 
-/* =====================================
+.imagem::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.15);
+
+    opacity:0;
+
+    transition:.4s;
+}
+
+.imagem:hover::after{
+    opacity:1;
+}
+
+/* ==========================================
+   SEÇÕES
+========================================== */
+
+.info-section,
+.benefits,
+.impact-section,
+.curiosities{
+
+    margin-top:4rem;
+
+    background:var(--cinza);
+
+    padding:2rem;
+
+    border-radius:20px;
+}
+
+/* ==========================================
+   ESTATÍSTICAS
+========================================== */
+
+.stats-section{
+    margin-top:4rem;
+}
+
+.stats-section .card{
+
+    text-align:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ffffff,
+        #f8fafc
+    );
+}
+
+.stats-section .card h3{
+
+    font-size:3.5rem;
+
+    font-weight:800;
+
+    color:var(--azul);
+}
+
+/* ==========================================
+   FORMULÁRIO
+========================================== */
+
+.form-card{
+
+    position:sticky;
+    top:30px;
+
+    background:white;
+
+    padding:2rem;
+
+    border-radius:20px;
+
+    border-top:6px solid var(--verde);
+
+    box-shadow:var(--shadow);
+}
+
+.form-card h2{
+    color:var(--verde);
+    margin-bottom:1rem;
+}
+
+.form-card p{
+    margin-bottom:1rem;
+}
+
+.form-card form{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:1rem;
+}
+
+.form-card input{
+
+    padding:1rem;
+
+    border-radius:10px;
+
+    border:1px solid #ddd;
+}
+
+.form-card button{
+
+    border:none;
+
+    background:var(--verde);
+
+    color:white;
+
+    padding:1rem;
+
+    border-radius:10px;
+
+    transition:.3s;
+}
+
+.form-card button:hover{
+    background:#246b44;
+}
+
+/* ==========================================
    ACCORDION
-===================================== */
+========================================== */
 
 .accordion-section{
-    margin-bottom:4rem;
+    margin-top:4rem;
 }
 
 .accordion-item{
@@ -248,13 +431,12 @@ textarea{
 }
 
 .accordion-header{
+
     width:100%;
 
     border:none;
 
     text-align:left;
-
-    cursor:pointer;
 
     padding:1rem;
 
@@ -265,7 +447,12 @@ textarea{
     border-radius:12px;
 }
 
+.accordion-header.opened{
+    background:var(--verde);
+}
+
 .accordion-content{
+
     display:none;
 
     padding:1rem;
@@ -279,93 +466,15 @@ textarea{
     display:block;
 }
 
-/* =====================================
-   TIMELINE
-===================================== */
-
-.timeline{
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(250px,1fr));
-
-    gap:1.5rem;
-}
-
-.timeline-item{
-    background:white;
-
-    padding:1.5rem;
-
-    border-radius:20px;
-
-    border-top:5px solid var(--ouro);
-
-    box-shadow:var(--shadow);
-
-    transition:var(--transition);
-}
-
-.timeline-item:hover{
-    transform:translateY(-6px);
-}
-
-/* =====================================
-   FORMULÁRIO
-===================================== */
-
-.form-card{
-    position:sticky;
-    top:30px;
-
-    background:white;
-
-    padding:2rem;
-
-    border-radius:20px;
-
-    border-top:6px solid var(--verde);
-
-    box-shadow:var(--shadow);
-
-    transition:var(--transition);
-}
-
-.form-card:hover{
-    transform:translateY(-5px);
-}
-
-.form-card h2{
-    color:var(--verde);
-    margin-bottom:1rem;
-}
-
-.form-card p{
-    margin-bottom:1rem;
-}
-
-.form-card form{
-    display:flex;
-    flex-direction:column;
-    gap:1rem;
-}
-
-.form-card input{
-    padding:1rem;
-
-    border-radius:10px;
-
-    border:1px solid #ddd;
-}
-
-/* =====================================
+/* ==========================================
    COMENTÁRIOS
-===================================== */
+========================================== */
 
 .comments{
+
     margin-top:4rem;
 
-    background:#f8fafc;
+    background:var(--cinza);
 
     padding:2rem;
 
@@ -373,19 +482,33 @@ textarea{
 }
 
 .comments textarea{
+
     width:100%;
 
     min-height:150px;
 
     resize:vertical;
 
-    padding:1rem;
-
     margin:1rem 0;
+
+    padding:1rem;
 
     border-radius:12px;
 
     border:1px solid #ddd;
+}
+
+#saveComment{
+
+    border:none;
+
+    background:var(--verde);
+
+    color:white;
+
+    padding:1rem;
+
+    border-radius:10px;
 }
 
 #commentList{
@@ -393,7 +516,10 @@ textarea{
 }
 
 .comment{
+
     background:white;
+
+    margin-bottom:1rem;
 
     padding:1rem;
 
@@ -402,34 +528,14 @@ textarea{
     border-left:5px solid var(--verde);
 
     box-shadow:var(--shadow);
-
-    margin-bottom:1rem;
 }
 
-/* =====================================
-   SEÇÕES EXTRAS
-===================================== */
-
-.info-section,
-.benefits,
-.timeline-section,
-.impact-section,
-.curiosities,
-.conclusion{
-    margin-top:4rem;
-
-    background:#f8fafc;
-
-    padding:2rem;
-
-    border-radius:20px;
-}
-
-/* =====================================
+/* ==========================================
    ACESSIBILIDADE
-===================================== */
+========================================== */
 
 .accessibility-box{
+
     position:fixed;
 
     right:15px;
@@ -437,22 +543,20 @@ textarea{
 
     width:140px;
 
-    max-height:75vh;
-
-    overflow-y:auto;
-
     background:white;
 
     border-radius:18px;
 
     padding:.8rem;
 
-    box-shadow:0 15px 35px rgba(0,0,0,.15);
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.15);
 
     z-index:1000;
 }
 
 .accessibility-box h3{
+
     text-align:center;
 
     color:var(--azul);
@@ -463,6 +567,7 @@ textarea{
 }
 
 .accessibility-box button{
+
     width:100%;
 
     border:none;
@@ -477,22 +582,21 @@ textarea{
 
     color:white;
 
-    cursor:pointer;
-
     transition:.3s;
-
-    font-size:.85rem;
 }
 
 .accessibility-box button:hover{
     transform:translateY(-2px);
 }
 
-/* =====================================
+/* ==========================================
    RODAPÉ
-===================================== */
+========================================== */
 
 footer{
+
+    margin-top:4rem;
+
     background:
     linear-gradient(
         135deg,
@@ -506,60 +610,100 @@ footer{
 }
 
 .footer-content{
+
     max-width:1200px;
+
     margin:auto;
 }
 
 .footer-content ul{
-    margin:1rem 0 2rem 1.5rem;
+
+    margin:
+    1rem 0
+    2rem
+    1.5rem;
 }
 
 .footer-phrase{
+
     color:var(--amarelo);
+
     font-weight:bold;
 }
 
-/* =====================================
+/* ==========================================
+   ANIMAÇÕES
+========================================== */
+
+.card,
+.imagem{
+
+    opacity:0;
+
+    transform:
+    translateY(30px);
+}
+
+.show{
+
+    opacity:1;
+
+    transform:
+    translateY(0);
+
+    transition:.7s ease;
+}
+
+/* ==========================================
    DARK MODE
-===================================== */
+========================================== */
 
 .dark-mode{
+
     background:#121212;
+
     color:#f5f5f5;
 }
 
-.dark-mode main{
-    background:#121212;
-}
-
 .dark-mode .card,
-.dark-mode .timeline-item,
 .dark-mode .form-card,
 .dark-mode .accordion-content,
 .dark-mode .comment{
-    background:#1f1f1f;
+
+    background:var(--cinza-escuro);
+
     color:white;
 }
 
 .dark-mode .info-section,
 .dark-mode .benefits,
-.dark-mode .timeline-section,
 .dark-mode .impact-section,
 .dark-mode .curiosities,
-.dark-mode .conclusion,
 .dark-mode .comments{
+
     background:#1a1a1a;
 }
 
 .dark-mode input,
 .dark-mode textarea{
+
     background:#2a2a2a;
+
     color:white;
+
     border:1px solid #555;
 }
 
 .dark-mode .section-title h2{
     color:#67b7ff;
+}
+
+.dark-mode .accordion-header{
+    background:#0f4fa8;
+}
+
+.dark-mode .accordion-header.opened{
+    background:var(--verde);
 }
 
 .dark-mode .accessibility-box{
@@ -570,9 +714,9 @@ footer{
     background:#000;
 }
 
-/* =====================================
+/* ==========================================
    RESPONSIVO
-===================================== */
+========================================== */
 
 @media(max-width:900px){
 
@@ -580,132 +724,45 @@ footer{
         grid-template-columns:1fr;
     }
 
-    .sidebar{
-        order:0;
-    }
-
     .form-card{
         position:relative;
         top:auto;
     }
 
-    .accessibility-box{
-        width:130px;
+}
+
+@media(max-width:768px){
+
+    .hero{
+        min-height:80vh;
+    }
+
+    .hero h1{
+        font-size:2.5rem;
+    }
+
+    .hero p{
+        font-size:1.1rem;
     }
 
 }
 
 @media(max-width:600px){
 
-    .hero h1{
-        font-size:2.4rem;
+    .hero{
+        padding:2rem 1rem;
     }
 
-    .hero{
-        padding:3rem 1rem;
+    .section-title h2{
+        font-size:1.7rem;
+    }
+
+    .stats-section .card h3{
+        font-size:2.5rem;
     }
 
     .accessibility-box{
         width:120px;
-        right:10px;
-        bottom:10px;
-    }
-}
-```
-
-body{
-    overflow-x:hidden;
-}
-
-.container{
-    width:min(1200px,92%);
-    margin:auto;
-}
-
-.hero{
-    min-height:80vh;
-}
-
-.imagem img{
-    width:100%;
-    height:280px;
-    object-fit:cover;
-}
-
-.card{
-    height:100%;
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:3rem;
-}
-
-.section-title h2{
-    font-size:2rem;
-}
-
-.full-card{
-    padding:2rem;
-    line-height:1.9;
-}
-
-@media (max-width:768px){
-
-    .hero{
-        min-height:70vh;
     }
 
-    .hero h1{
-        font-size:2.2rem;
-    }
-
-    .accessibility-box{
-        width:140px;
-        font-size:12px;
-    }
-
-    .accessibility-box button{
-        padding:.6rem;
-    }
-
-}
-.accordion-header.opened{
-    background:var(--verde);
-}
-#backToTop{
-    opacity:0;
-    visibility:hidden;
-    transition:.3s;
-}
-.card,
-.timeline-item,
-.imagem{
-    opacity:0;
-    transform:translateY(30px);
-}
-
-.show{
-    opacity:1;
-    transform:translateY(0);
-    transition:.7s ease;
-}
-.dark-mode .card h3{
-    color:#8aff8a;
-}
-
-.dark-mode .accordion-header{
-    background:#0f4fa8;
-}
-
-.dark-mode .accordion-header.opened{
-    background:#2E8B57;
-}
-.stats-section .card{
-    text-align:center;
-}
-
-.stats-section h3{
-    font-size:3rem;
-    color:var(--azul);
 }
