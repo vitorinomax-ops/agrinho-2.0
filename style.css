@@ -710,3 +710,6 @@ body{
     }
 
 }
+.accordion-header.opened{
+    background:var(--verde);
+}
