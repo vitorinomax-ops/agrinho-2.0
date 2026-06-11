@@ -713,3 +713,8 @@ body{
 .accordion-header.opened{
     background:var(--verde);
 }
+#backToTop{
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+}
