@@ -29,9 +29,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             });
 
-            if (!isActive) {
-                content.classList.add("active");
-            }
+        if (!isActive) {
+
+    content.classList.add("active");
+
+    button.classList.add("opened");
+
+} else {
+
+    button.classList.remove("opened");
+
+}
 
         });
 
