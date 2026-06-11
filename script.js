@@ -512,3 +512,25 @@ topButton.style.visibility = "hidden";
     );
 
 });
+const observer =
+new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+},{
+    threshold:0.2
+});
+
+document
+.querySelectorAll(
+".card,.timeline-item,.imagem"
+)
+.forEach(el => observer.observe(el));
