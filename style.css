@@ -718,3 +718,15 @@ body{
     visibility:hidden;
     transition:.3s;
 }
+.card,
+.timeline-item,
+.imagem{
+    opacity:0;
+    transform:translateY(30px);
+}
+
+.show{
+    opacity:1;
+    transform:translateY(0);
+    transition:.7s ease;
+}
